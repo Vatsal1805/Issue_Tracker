@@ -37,6 +37,16 @@ async login(userData) {
     const token = JWTUtil.generateToken({ id: user._id });
     return { user, token };
     }
+async getCurrentUser(userId){
+    if(!userId){
+        throw new ApiError(401,'User not authenticated');
+    }
+    const user = await UserRepository.findById(userId);
+    if(!user){
+        throw new ApiError(404,'User not found');
+    }
+    return user;
+}
 }
 
 module.exports = AuthService;
