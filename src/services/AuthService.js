@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const UserRepository = require('../repositories/UserRepository');
 const JWTUtil = require('../utils/jwt.util');
-const ApiError = require('../errors/ApiError');
+const ApiError=require('../errors/Apierror');
 
 class AuthService {
     async register(userData) {
@@ -39,4 +39,4 @@ async login(userData) {
     }
 }
 
-module.exports = new AuthService();
+module.exports = AuthService;

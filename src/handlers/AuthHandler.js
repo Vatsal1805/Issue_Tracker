@@ -1,9 +1,13 @@
 const AuthService = require('../services/AuthService');
 
 class AuthHandler {
+    constructor() {
+        this.authService = new AuthService();
+    }
+
     async register(req, res, next) {
         try{
-            const result = await AuthService.register(req.body);
+            const result = await this.authService.register(req.body);
             res.status(201).json(result);
         }catch (error) {
             next(error);
@@ -12,7 +16,7 @@ class AuthHandler {
 
     async login(req, res, next) {
         try {
-            const result = await AuthService.login(req.body);
+            const result = await this.authService.login(req.body);
             res.status(200).json(result);
         } catch (error) {
             next(error);
@@ -20,4 +24,4 @@ class AuthHandler {
     }
 }
 
-module.exports = new AuthHandler();
+module.exports = AuthHandler;
