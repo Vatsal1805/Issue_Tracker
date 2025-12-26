@@ -57,7 +57,7 @@ class EmailUtil {
                     </div>
                     
                     <div style="text-align: center; margin: 30px 0;">
-                        <a href="http://localhost:3001/dashboard" class="button">Go to Dashboard</a>
+                        <a href="${process.env.FRONTEND_URL || 'http://localhost:3001'}/dashboard" class="button">Go to Dashboard</a>
                     </div>
                 </div>
                 
