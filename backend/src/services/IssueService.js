@@ -1,7 +1,10 @@
 const IssueRepository = require('../repositories/IssueRepository');
+const UserRepository = require('../repositories/UserRepository');
+const notificationService = require('./notification.service');
 const ApiError = require('../errors/Apierror');
 
 class IssueService {
+
     async createIssue(data, userID) {
         const { title, description, type, priority } = data;
         if (!title || !description || !type) {
@@ -14,6 +17,21 @@ class IssueService {
             priority: priority || 'Medium',
             createdBy: userID
         });
+
+        try {
+            const user = await UserRepository.findById(userID);
+            if (user) {
+                await notificationService.sendIssueCreatedNotification(user, {
+                    title,
+                    description,
+                    type,
+                    priority: priority || 'Medium'
+                });
+            }
+        } catch (emailError) {
+            console.error('Failed to send issue notification:', emailError);
+        }
+
         return newIssue;
     }
 

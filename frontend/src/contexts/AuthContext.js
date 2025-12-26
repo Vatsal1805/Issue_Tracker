@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import api from '../lib/api';
 
-// Auth action types
 const AUTH_ACTIONS = {
   LOGIN_START: 'LOGIN_START',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
@@ -17,16 +16,14 @@ const AUTH_ACTIONS = {
   CLEAR_ERROR: 'CLEAR_ERROR',
 };
 
-// Initial auth state
 const initialState = {
   user: null,
   token: null,
   isAuthenticated: false,
-  isLoading: true, // Start with loading true to check existing auth
+  isLoading: true,
   error: null,
 };
 
-// Auth reducer
 function authReducer(state, action) {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN_START:

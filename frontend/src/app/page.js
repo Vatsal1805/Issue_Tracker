@@ -54,7 +54,7 @@ export default function Home() {
               <Link href="#services" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-1">
                 Explore Services
               </Link>
-              <Link href="#contact" className="border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
+              <Link href="/login" className="border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
                 Get Started
               </Link>
             </div>

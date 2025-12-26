@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../contexts/AuthContext";
 
-// Loading spinner component
 const LoadingSpinner = () => (
   <div className="min-h-screen bg-slate-900 flex items-center justify-center">
     <div className="text-center">
@@ -14,7 +13,6 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// Protected route wrapper component
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
@@ -25,7 +23,6 @@ export default function ProtectedRoute({ children }) {
     }
   }, [isAuthenticated, isLoading, router]);
 
-  // Show loading spinner while checking auth status
   if (isLoading) {
     return <LoadingSpinner />;
   }
