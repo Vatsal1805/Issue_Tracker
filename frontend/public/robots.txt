@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://apnisec.com/sitemap.xml
+
+# Crawl-delay for non-essential bots
+User-agent: CCBot
+Crawl-delay: 10
+
+User-agent: ChatGPT-User
+Crawl-delay: 10
+
+User-agent: GPTBot
+Crawl-delay: 10
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /login
+Disallow: /register

@@ -5,10 +5,10 @@ class IssueRepository {
         return Issue.create(issueData);
     }
     async findByUser(userID) {
-        return await Issue.find({ userID }).sort({ createdAt: -1 });
+        return await Issue.find({ createdBy: userID }).sort({ createdAt: -1 });
     }
     async deleteIssue(issueID, userID) {
-        return Issue.findOneAndDelete({ _id: issueID, userID });
+        return Issue.findOneAndDelete({ _id: issueID, createdBy: userID });
     }
 }
 

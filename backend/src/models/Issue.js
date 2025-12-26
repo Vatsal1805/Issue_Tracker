@@ -14,11 +14,17 @@ const issueSchema = new mongoose.Schema({
       enum: ["Cloud Security", "Red Team Assessment", "VAPT"],
       required: true,
     },
+    priority: {
+      type: String,
+      enum: ["Low", "Medium", "High"],
+      default: "Medium",
+    },
     status: {
       type: String,
+      enum: ["Open", "In Progress", "Resolved", "Closed"],
       default: "Open",
     },
-    userID:{
+    createdBy:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,

@@ -3,7 +3,7 @@ const ApiError = require('../errors/Apierror');
 
 class IssueService {
     async createIssue(data, userID) {
-        const { title, description,type } = data;
+        const { title, description, type, priority } = data;
         if (!title || !description || !type) {
             throw new ApiError(400, 'Title, description, and type are required');
         }
@@ -11,7 +11,8 @@ class IssueService {
             title,
             description,
             type,
-            userID
+            priority: priority || 'Medium',
+            createdBy: userID
         });
         return newIssue;
     }
