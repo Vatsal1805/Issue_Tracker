@@ -8,7 +8,7 @@ const app = express();
 
 // Enable CORS with specific options
 app.use(cors({
-    origin: ['http://localhost:3001', 'http://localhost:3000', 'https://issue-tracker-frontend.vercel.app'],
+    origin: ['http://localhost:3001', 'http://localhost:3000', 'https://issue-tracker-frontend.vercel.app', /\.vercel\.app$/],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -18,6 +18,20 @@ app.use(express.json());
 
 
 app.use(RateLimiter);
+
+// Root route for health check
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'ApniSec Issue Tracker API is running!', 
+        status: 'healthy',
+        version: '1.0.0',
+        endpoints: {
+            auth: '/api/auth',
+            issues: '/api/issues',
+            test: '/api/test'
+        }
+    });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/issues', issueRoutes);
