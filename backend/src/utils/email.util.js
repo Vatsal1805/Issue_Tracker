@@ -3,17 +3,34 @@ const { Resend } = require('resend');
 class EmailUtil {
     constructor() {
         this.resend = new Resend(process.env.RESEND_API_KEY);
-        this.fromEmail = 'ApniSec <onboarding@resend.dev>';
+        this.fromEmail = process.env.FROM_EMAIL || 'ApniSec <onboarding@resend.dev>';
+        
+        // Log configuration for debugging
+        console.log('📧 Email Configuration:');
+        console.log('- API Key:', process.env.RESEND_API_KEY ? '✅ Set' : '❌ Missing');
+        console.log('- From Email:', this.fromEmail);
+        console.log('- Environment:', process.env.NODE_ENV || 'development');
     }
     async sendEmail(emailData) {
         try {
+            console.log('📤 Attempting to send email to:', emailData.to);
+            console.log('📤 Using from email:', this.fromEmail);
+            
             const response = await this.resend.emails.send({
                 from: this.fromEmail,
                 ...emailData
             });
+            
+            console.log('✅ Email sent successfully:', response);
             return response;
         } catch (error) {
-            console.error('Email sending failed:', error);
+            console.error('❌ Email sending failed:', {
+                error: error.message,
+                recipient: emailData.to,
+                subject: emailData.subject,
+                fromEmail: this.fromEmail,
+                timestamp: new Date().toISOString()
+            });
             throw error;
         }
     }
